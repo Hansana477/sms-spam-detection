@@ -21,13 +21,13 @@ def index():
         message = request.form["message"]
         X = vectorizer.transform([message])
 
-        # Prediction
+        
         result = model.predict(X)[0]
         probs = model.predict_proba(X)[0]
         confidence = round(max(probs) * 100, 2)
         prediction = "SPAM 🚫" if result == 1 else "NOT SPAM ✅"
 
-        # 🔍 Explanation logic
+        
         feature_names = vectorizer.get_feature_names_out()
         word_scores = X.toarray()[0]
 
@@ -37,7 +37,7 @@ def index():
             if score > 0
         ]
 
-        explanation = important_words[:5]  # top words used
+        explanation = important_words[:5]  
 
     return render_template(
         "index.html",
